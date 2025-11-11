@@ -1,0 +1,63 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyimbo Download Hub</title>
+<style>
+body { font-family:sans-serif; background:#111; color:#fff; margin:0; padding:0;}
+header { background:#e50914; color:white; padding:1rem; text-align:center;}
+section { padding:15px;}
+.song { background:#222; margin-bottom:10px; padding:10px; border-radius:8px;}
+.song h3 { margin:0 0 5px 0;}
+audio { width:100%; margin-bottom:5px;}
+a { color:#e50914; text-decoration:none; font-weight:bold;}
+button { padding:5px 10px; margin-bottom:10px;}
+</style>
+</head>
+<body>
+<header>
+<h1>🎵 Nyimbo Download Hub</h1>
+<button id="langBtn">English</button>
+</header>
+
+<section id="songs">
+<div class="song">
+<h3>Harmonize - Lite Version</h3>
+<audio controls>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+<a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" download>📥 Pakua</a>
+</div>
+
+<div class="song">
+<h3>Diamond - Lite Version</h3>
+<audio controls>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
+</audio>
+<a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" download>📥 Pakua</a>
+</div>
+
+<div class="song">
+<h3>Billnass - Lite Version</h3>
+<audio controls>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
+</audio>
+<a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" download>📥 Pakua</a>
+</div>
+</section>
+
+<script>
+const langBtn = document.getElementById('langBtn');
+langBtn.addEventListener('click', () => {
+if(langBtn.textContent==='English'){
+langBtn.textContent='Kiswahili';
+document.querySelector('header h1').textContent='🎵 Nyimbo Pakua Hub';
+}else{
+langBtn.textContent='English';
+document.querySelector('header h1').textContent='🎵 Nyimbo Download Hub';
+}
+});
+</script>
+</body>
+</html>
