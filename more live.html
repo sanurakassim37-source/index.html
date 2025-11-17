@@ -1,0 +1,370 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Live Matches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 15px;
+      background: #f3f3f3;
+    }
+
+    /* Header ya nyekundu */
+    .header {
+      background: #cc0000;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Box za mechi */
+    .match {
+      background: #fff;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 10px;
+      border-left: 5px solid #cc0000;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .league {
+      color: #cc0000;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    /* Button ya nyekundu */
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      background: #cc0000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #a50000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">LIVE MATCHES</div>
+
+<div id="live"></div>
+
+<script>
+  const API_KEY = "YOUR_API_KEY"; 
+  const API_URL = "https://v3.football.api-sports.io/fixtures?live=all";
+
+  // STREAMING RASMI
+  function getOfficialStream(leagueName){
+    leagueName = leagueName.toLowerCase();
+
+    if(leagueName.includes("premier")) return "https://www.dstv.stream";
+    if(leagueName.includes("laliga")) return "https://www.startimestv.com/app/startimes-on";
+    if(leagueName.includes("serie a")) return "https://www.startimestv.com/app/startimes-on";
+    if(leagueName.includes("bundesliga")) return "https://www.startimestv.com/app/startimes-on";
+    if(leagueName.includes("ligue 1")) return "https://www.beinsports.com";
+    if(leagueName.includes("saudi")) return "https://www.shahid.net";
+    if(leagueName.includes("egypt")) return "https://www.dstv.stream";
+    if(leagueName.includes("south africa")) return "https://www.dstv.stream";
+
+    return "#";
+  }
+
+  async function loadLive(){
+    const res = await fetch(API_URL, {
+      headers: { "x-apisports-key": API_KEY }
+    });
+    const data = await res.json();
+
+    const box = document.getElementById("live");
+    box.innerHTML = "";
+
+    if(data.response.length === 0){
+      box.innerHTML = "<p>Hakuna mechi live kwa sasa.</p>";
+      return;
+    }
+
+    data.response.forEach(m => {
+      const div = document.createElement("div");
+      div.className = "match";
+
+      const league = m.league.name;
+      const home = m.teams.home.name;
+      const away = m.teams.away.name;
+      const link = getOfficialStream(league);
+
+      div.innerHTML = `
+        <div class="league">${league}</div>
+        <div>${home} vs ${away}</div>
+        <a href="${link}" class="btn" target="_blank">Tazama Live (Official)</a>
+      `;
+
+      box.appendChild(div);
+    });
+  }
+
+  loadLive();
+  setInterval(loadLive, 15000); 
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Live Matches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 15px;
+      background: #f3f3f3;
+    }
+
+    /* Header ya nyekundu */
+    .header {
+      background: #cc0000;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Box za mechi */
+    .match {
+      background: #fff;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 10px;
+      border-left: 5px solid #cc0000;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .league {
+      color: #cc0000;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    /* Button ya nyekundu */
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      background: #cc0000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #a50000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">LIVE MATCHES</div>
+
+<div id="live"></div>
+
+<script>
+  const API_KEY = "YOUR_API_KEY"; 
+  const API_URL = "https://v3.football.api-sports.io/fixtures?live=all";
+
+  // STREAMING RASMI
+  function getOfficialStream(leagueName){
+    leagueName = leagueName.toLowerCase();
+
+    if(leagueName.includes("premier")) return "https://www.dstv.stream";
+    if(leagueName.includes("laliga")) return "https://www.startimestv.com/app/startimes-on";
+    if(leagueName.includes("serie a")) return "https://www.startimestv.com/app/startimes-on";
+    if(leagueName.includes("bundesliga")) return "https://www.startimestv.com/app/startimes-on";
+    if(leagueName.includes("ligue 1")) return "https://www.beinsports.com";
+    if(leagueName.includes("saudi")) return "https://www.shahid.net";
+    if(leagueName.includes("egypt")) return "https://www.dstv.stream";
+    if(leagueName.includes("south africa")) return "https://www.dstv.stream";
+
+    return "#";
+  }
+
+  async function loadLive(){
+    const res = await fetch(API_URL, {
+      headers: { "x-apisports-key": API_KEY }
+    });
+    const data = await res.json();
+
+    const box = document.getElementById("live");
+    box.innerHTML = "";
+
+    if(data.response.length === 0){
+      box.innerHTML = "<p>Hakuna mechi live kwa sasa.</p>";
+      return;
+    }
+
+    data.response.forEach(m => {
+      const div = document.createElement("div");
+      div.className = "match";
+
+      const league = m.league.name;
+      const home = m.teams.home.name;
+      const away = m.teams.away.name;
+      const link = getOfficialStream(league);
+
+      div.innerHTML = `
+        <div class="league">${league}</div>
+        <div>${home} vs ${away}</div>
+        <a href="${link}" class="btn" target="_blank">Tazama Live (Official)</a>
+      `;
+
+      box.appendChild(div);
+    });
+  }
+
+  loadLive();
+  setInterval(loadLive, 15000); 
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MORE LIVE - Live Matches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">MORE LIVE - LIVE MATCHES</div>
+
+<div id="live"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
+<style>body {
+  font-family: Arial, sans-serif;
+  padding: 15px;
+  background: #f3f3f3;
+}
+
+/* Header nyekundu */
+.header {
+  background: #cc0000;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Kila mechi */
+.match {
+  background: #fff;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border-left: 5px solid #cc0000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.league {
+  color: #cc0000;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Button nyekundu */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  background: #cc0000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #a50000;
+}
+</style><script>const API_KEY = "YOUR_API_KEY"; 
+const API_URL = "https://v3.football.api-sports.io/fixtures?live=all";
+
+// STREAMING RASMI
+function getOfficialStream(leagueName){
+  leagueName = leagueName.toLowerCase();
+
+  if(leagueName.includes("premier")) return "https://www.dstv.stream";
+  if(leagueName.includes("laliga")) return "https://www.startimestv.com/app/startimes-on";
+  if(leagueName.includes("serie a")) return "https://www.startimestv.com/app/startimes-on";
+  if(leagueName.includes("bundesliga")) return "https://www.startimestv.com/app/startimes-on";
+  if(leagueName.includes("ligue 1")) return "https://www.beinsports.com";
+  if(leagueName.includes("saudi")) return "https://www.shahid.net";
+  if(leagueName.includes("egypt")) return "https://www.dstv.stream";
+  if(leagueName.includes("south africa")) return "https://www.dstv.stream";
+
+  return "#";
+}
+
+// LOAD LIVE MATCHES
+async function loadLive(){
+  const res = await fetch(API_URL, {
+    headers: { "x-apisports-key": API_KEY }
+  });
+
+  const data = await res.json();
+  const box = document.getElementById("live");
+  box.innerHTML = "";
+
+  if(data.response.length === 0){
+    box.innerHTML = "<p>Hakuna mechi live kwa sasa.</p>";
+    return;
+  }
+
+  data.response.forEach(m => {
+    const div = document.createElement("div");
+    div.className = "match";
+
+    const league = m.league.name;
+    const home = m.teams.home.name;
+    const away = m.teams.away.name;
+    const link = getOfficialStream(league);
+
+    div.innerHTML = `
+      <div class="league">${league}</div>
+      <div>${home} vs ${away}</div>
+      <a href="${link}" class="btn" target="_blank">Tazama Live (Official)</a>
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+loadLive();
+setInterval(loadLive, 15000); // refresh kila sekunde 15
+</script>
